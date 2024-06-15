@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="p">
+	<!-- select외에는 resultType이 필수지만, 그 외의 insert, delete, update 등에서는 넣어선 안됨. -->
+	<select id="product_list" resultType="pro" parameterType="String">
+		select * from product where category=#{category}
+	</select>
+	
+	<!-- 상품추가 -->
+	<insert id="product_insert" parameterType="pro">
+	
+		insert into PRODUCT values(
+			seq_pro_idx.nextVal, 
+			#{category},	
+			#{p_num},
+			#{p_name},
+			#{p_company},
+			#{p_price},
+			#{p_saleprice},
+			#{p_image_s},
+			#{p_image_l},
+			#{p_content},
+			sysdate
+		)
+	</insert>
+	<!-- 상세보기 상품 조회 -->
+	<select id="product_content" resultType="pro" parameterType="int">
+		select * from product where idx=#{idx}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

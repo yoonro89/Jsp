@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="s">
+	<select id="sawon_list" resultType="vo.SawonVO">	<!-- 1. mapper클래스 안의 select문에는 무조건 resultType속성이 필요하다.		2. ;을 넣으면 오류가 난다 -->
+		select * from sawon
+	</select>
+	
+	<select id="sawon_list_deptno" resultType="vo.SawonVO" parameterType="int">		
+														<!-- 1. mapper클래스에서 파라미터를 받을경우 타입을 반드시 표기한다. 
+															 2. 기본타입은 타입만 기재하면 된다.
+															 3. vo의 경우 vo.name처럼 전부 써야한다. -->
+		select * from sawon where deptno=#{deptno}		<!-- 1. #{ 받아온 파라미터의 위치 }의 형태로 사용한다.
+															 2. 파라미터명은 무엇이든 상관없지만 되도록 알아보기 쉽게 통일하자. -->
+	</select>						
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
