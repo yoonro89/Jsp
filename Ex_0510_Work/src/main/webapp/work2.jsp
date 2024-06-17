@@ -19,7 +19,7 @@ List<SawonVO> s_list = dao.selectList(dept_no);
 	
 	<body>
 		<form>
-		<table border="">
+		<table border="1">
 			<tr>
 				<th>부서번호</th>
 				<th>사원번호</th>

@@ -10,6 +10,15 @@
 			function send(f){
 				f.action = "work2.jsp";
 				f.method = 'POST';
+				
+				let age = f.age.vlaue;
+				let pat = /^[0-9]*$/;
+				if( !pat.test(age) ){
+					alert("정수만 입력해");
+					f.age.focus();
+					return;
+				}
+				
 				f.submit();
 			}
 		</script>

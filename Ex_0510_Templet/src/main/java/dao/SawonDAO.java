@@ -23,13 +23,13 @@ public class SawonDAO {
 		return single;
 	}
 	
-	public List<SawonVO> selectList(int sabun) {
+	public List<SawonVO> selectList(int deptno) {
 
 		List<SawonVO> list = new ArrayList<SawonVO>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from sawon where sabun="+sabun;
+		String sql = "select * from sawon where deptno="+deptno;
 
 		try {
 			//1.Connection얻어온다

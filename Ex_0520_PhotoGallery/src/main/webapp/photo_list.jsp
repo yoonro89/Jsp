@@ -32,8 +32,7 @@
 			}
 			
 			function download(filename){
-				location.href="download.do?dir=/upload/&filename="
-						+encodeURIComponent(filename);
+				location.href="download.do?dir=/upload/&filename="+encodeURIComponent(filename);
 			}
 		</script>
 		

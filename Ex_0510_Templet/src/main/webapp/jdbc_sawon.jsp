@@ -5,8 +5,10 @@
     pageEncoding="UTF-8"%>
 
 <%
+int deptno = Integer.parseInt( request.getParameter("deptno"));
+
 SawonDAO dao = SawonDAO.getInstance();
-List<SawonVO> s_list = dao.selectList(5);
+List<SawonVO> s_list = dao.selectList(deptno);
 %>
 
 <!DOCTYPE html>

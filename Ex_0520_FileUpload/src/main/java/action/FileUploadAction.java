@@ -34,18 +34,16 @@ public class FileUploadAction extends HttpServlet {
 		
 		System.out.println("절대경로 : " +path);
 		
-		//쵀대 업로드 용량을 지정(바이트 단위) : 여기선 100메가로 설정
+		//최대 업로드 용량 100Mb
 		int max_size = 1024 * 1024 * 100;
 		
 		//파일을 포함한 업로드를 처리하는 객체
 		MultipartRequest mr = new MultipartRequest(
-			//MultipartRequest(이하 멀파리)는 라이브러리에 cos.jar가 없으면 사용할 수 없다.
-								request,	//넘어온 파라미터를 수신(request의 역할) 해서 멀파리에게 위임
-								path, 		//파일 저장 경로
-								max_size, 	//최대 용량
-								"utf-8", 	//멀파리를 사용하는 경우 한글깨짐처리를 여기서 함.
-								new DefaultFileRenamePolicy());
-											//동일파일명정책 : 동일명의 파일을 자동으로 개명
+								request, 
+								path, 
+								max_size, 
+								"utf-8", 
+								new DefaultFileRenamePolicy());//동일파일명정책 : 동일명의 파일을 자동으로 개명
 		
 		//업로드 된 파일정보 얻어오기
 		String filename = "no_file";

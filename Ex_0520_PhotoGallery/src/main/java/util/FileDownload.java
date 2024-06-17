@@ -14,11 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * IE 8.0�ΰ�� ȭ�ϴٿ�ε� ��û�� 2ȸ�ǽ�
- * (������ ��Ȯ�� �𸣰����� ȭ�ϴٿ�ε� ���̾Ʒαװ� ������鼭 �ٽ� ȣ���ϴ°� ����.)
- * ù��° ��û�ΰ�� �ѱ����ڵ��� ����� �̷����µ�
- * �ι�°�� �ѱ��� ������
- * �׷��� ù��°���� �����س��� �װ��� ����Ѵ�.
+ * IE 8.0인경우 화일다운로드 요청을 2회실시
+ * (이유는 정확이 모르겠지만 화일다운로드 다이아로그가 띄어지면서 다시 호출하는것 같음.)
+ * 첫번째 요청인경우 한글인코딩이 제대로 이뤄지는데
+ * 두번째는 한글이 깨진다
+ * 그래서 첫번째값만 저장해놓고 그값을 사용한다.
  */
 
 @WebServlet("/download.do")
@@ -40,7 +40,7 @@ public class FileDownload extends HttpServlet {
 		File file = new File(fullpathname);
 		byte [] b = new byte[1024*1024*4];
 		
-		 // ����� ������ Ÿ�� ������
+		 // 사용자 브라우저 타입 얻어오기
         String strAgent = request.getHeader("User-Agent");
         String userCharset = request.getCharacterEncoding();
         if(userCharset==null)userCharset="utf-8";
@@ -48,15 +48,15 @@ public class FileDownload extends HttpServlet {
         //System.out.println("filename:"+filename+"\nagent:"+strAgent+"\ncharset:"+userCharset);
         //System.out.println("----------------------------------------------------------------");
         String value = "";
-        // IE �� ���
+        // IE 일 경우
         if (strAgent.indexOf("MSIE") > -1) 
         {
-            // IE 5.5 �� ���
+            // IE 5.5 일 경우
             if (strAgent.indexOf("MSIE 5.5") > -1) 
             {
                 value = "filename=" + filename ;
             }
-            // �׹ۿ�
+            // 그밖에
             else if (strAgent.indexOf("MSIE 7.0") > -1) 
             {
                 if ( userCharset.equalsIgnoreCase("UTF-8") ) 
@@ -73,7 +73,7 @@ public class FileDownload extends HttpServlet {
                 }
             }
             else{
-            	//IE 8.0�̻󿡼��� 2ȸ ȣ���..
+            	//IE 8.0이상에서는 2회 호출됨..
             	if ( userCharset.equalsIgnoreCase("UTF-8") ) 
                 {
                 	filename = URLEncoder.encode(filename,"utf-8");
@@ -90,23 +90,23 @@ public class FileDownload extends HttpServlet {
             
             
         }else if(strAgent.indexOf("Firefox") > -1){
-        	//Firefox : ���鹮�������� �νľȵ�...
+        	//Firefox : 공백문자이후은 인식안됨...
         	value = "attachment; filename=" + new String(filename.getBytes(), "ISO-8859-1");
         }
        else {
-            // IE �� ������ ������
+            // IE 를 제외한 브라우저
             value = "attachment; filename=" + new String(filename.getBytes(), "ISO-8859-1");
         }
         
    
         response.setContentType("Pragma: no-cache"); 
 
-		//���� �����Ͱ� stream ó���ǵ��� : �������� ���ڼ��� : 8859_1
+		//전송 데이터가 stream 처리되도록 : 웹상전송 문자셋은 : 8859_1
 		response.setContentType("application/octet-stream;charset=8859_1;");
-		//��� ȭ�Ͽ� ���ϰ� �ٿ�ε� ��ȭ���ڰ� ������ ����
+		//모든 화일에 대하고 다운로드 대화상자가 열리게 설정
 		//Content-Disposition : attachment
 		 response.setHeader("Content-Disposition", value);
-		//����Ÿ���� binary(����ȭ��)
+		//전송타입은 binary(이진화일)
 		response.setHeader("Content-Transfer-Encoding", "binary;");
 		if(file.isFile())
 		{

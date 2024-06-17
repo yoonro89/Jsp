@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- JNDI(Java naming directory interface) : context.xml과 같이
+<!-- JNDI(Java Naming and Directory Interface) : context.xml과 같이
 	 미리 준비해둔 리소스를 참조해서 사용할 수 있도록 만들어둔 참조파일 -->
 <Context>
 	<Resource 

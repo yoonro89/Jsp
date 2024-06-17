@@ -14,6 +14,13 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
+		<script>
+			function send(num){
+				
+				location.href = "jdbc_sawon.jsp?deptno="+num;
+				
+			}
+		</script>
 	</head>
 	
 	<body>
@@ -28,7 +35,9 @@
 			<% for( DeptVO vo : dept_list ){ %>
 			<tr>
 				<td><%= vo.getDeptno() %></td>
-				<td><%= vo.getDname() %></td>
+				
+				<td><a href="javascript:send(<%= vo.getDeptno() %>);">
+				<%= vo.getDname() %></a>
 				<td><%= vo.getLoc() %></td>
 			</tr>
 			<%} %>
