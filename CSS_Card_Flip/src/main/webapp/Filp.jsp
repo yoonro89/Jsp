@@ -8,13 +8,13 @@
 	<style>
 		.card{	display: inline-grid;/* grid개념은 공부가 필수임 css하려면... */
 				color: white;
-				transition: transform 0.1s;/* 변하는 시간, 클릭시랑 호버시 등의 액션에 따라 다르게 줘야 극적임 */
+				transition: transform 0.5s;/* 변하는 시간, 클릭시랑 호버시 등의 액션에 따라 다르게 줘야 극적임 */
 				transform: perspective(800px)/* 원근감 */ rotateY(0deg);/* 축을 잡는 개념(돌리는 방향이 아님, 돌아가는 축) */
 				transform-style: preserve-3d;/* 여기서 설정해두면 부모의 3D 효과가 자식에도 적용됨(없으면 잘 동작하지 않는다고 해서 넣어둠) */
 		}
 		
 		.card:active{/* 마우스를 클릭하고 있는 동안 [hover, active, visited(원클릭이후)]*/
-			transform: perspective(800px)/* 원근감 */ rotateY(180deg);/* 뒤집히는 정도 */
+			transform: perspective(200px)/* 원근감 */ rotateY(180deg);/* 뒤집히는 정도 */
 		}
 		/* 원근감
 			perspective값이 작으면 가까이서 보는 것처럼,
@@ -25,7 +25,7 @@
 			height: 100px;
 			padding: 10px;
 			border-radius: 8px;
-			backface-visibility:hidden;/* 호버시에 backface가 안보이게 되는 설정 */
+			backface-visibility:hidden;/* 액션시에 backface가 안보이게 되는 설정 */
 		}
 		
 		.front{
